@@ -1,9 +1,4 @@
 FROM debian:stable-slim
-NODE_VERSION=$(nodejs -v)
-if [ NODE_VERSION <= 'v9' ];then
-  RUN npm install node -g && npm install npm
-fi
-
 RUN apt-get update && apt-get install -y \
   wget \
   xz-utils \
@@ -11,6 +6,7 @@ RUN apt-get update && apt-get install -y \
   openssl \
   curl \
   graphicsmagick \
+  node \
   python \
   git \
   libstdc++ \
