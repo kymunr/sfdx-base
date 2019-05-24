@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
   openssl \
   curl \
   graphicsmagick \
-  node \
+  nodejs \
   python \
   git \
   libstdc++ \
