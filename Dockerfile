@@ -1,5 +1,5 @@
 FROM debian:stable-slim
-NODE_VERSION=$(node -v)
+NODE_VERSION=$(nodejs -v)
 if [ NODE_VERSION <= 'v9' ];then
   RUN npm install node -g && npm install npm
 fi
