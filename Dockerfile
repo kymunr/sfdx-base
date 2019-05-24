@@ -23,6 +23,4 @@ RUN wget https://www.browserstack.com/browserstack-local/BrowserStackLocal-linux
     && chmod +x BrowserStackLocal \
     && mv BrowserStackLocal /usr/local/bin \
     && rm BrowserStackLocal-linux-x64.zip
-WORKDIR $NIGHTWATCH_APP_DIR
-COPY . $NIGHTWATCH_APP_DIR
 CMD ["sfdx"]
