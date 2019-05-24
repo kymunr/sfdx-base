@@ -1,9 +1,19 @@
 FROM debian:stable-slim
+NODE_VERSION=$(node -v)
+if [ NODE_VERSION <= 'v9' ];then
+  RUN npm install node -g && npm install npm
+fi
+
 RUN apt-get update && apt-get install -y \
   wget \
   xz-utils \
   ca-certificates \
   openssl \
+  curl \
+  graphicsmagick \
+  python \
+  git \
+  libstdc++ \
   && rm -rf /var/lib/apt/lists/*
 RUN wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz && \
     mkdir sfdx && \
@@ -11,4 +21,11 @@ RUN wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.
     ./sfdx/install && \
     rm -rf sfdx
 RUN sfdx update
+RUN wget https://www.browserstack.com/browserstack-local/BrowserStackLocal-linux-x64.zip \
+    && unzip BrowserStackLocal-linux-x64.zip \
+    && chmod +x BrowserStackLocal \
+    && mv BrowserStackLocal /usr/local/bin \
+    && rm BrowserStackLocal-linux-x64.zip
+WORKDIR $NIGHTWATCH_APP_DIR
+COPY . $NIGHTWATCH_APP_DIR
 CMD ["sfdx"]
